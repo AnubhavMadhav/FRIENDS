@@ -17,4 +17,4 @@ def add_location(request):
 
 def map_view(request):
     locations = Location.objects.all()
-    return render(request, 'map_app/index.html', {'locations': locations})
+    return render(request, 'map_app/map.html', {'locations': locations})

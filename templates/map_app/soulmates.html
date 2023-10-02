@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Soulmates </title>
+    
+    <!-- Add Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <!-- Define custom CSS for styling the heart icon and text -->
+    <style>
+        .heart-icon {
+            text-align: center;
+            line-height: 1;
+        }
+        .marker-text {
+            text-align: center;
+            font-weight: bold;
+            color: red;
+            margin-top: -18px; /* Adjust this value to position the text appropriately */
+        }
+    </style>
+</head>
+<body>
+    <!-- Create a div to hold the map -->
+    <div id="map" style="height: 400px;"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([20.5937, 78.9629], 5);  // Initialize the map
+        
+        // Add a tile layer (e.g., OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        var customIcon = L.icon({
+            iconUrl: 'https://png.pngtree.com/png-vector/20230413/ourmid/pngtree-3d-location-icon-clipart-in-transparent-background-vector-png-image_6704161.png',
+            iconSize: [32, 32],
+            iconAnchor: [16, 32],
+            popupAnchor: [0, -32]
+        });
+
+        // Satara
+        var marker1 = L.marker([17.681727, 74.00836], {
+            icon: customIcon
+        }).addTo(map);
+
+        // Vadodara
+        var marker2 = L.marker([22.313792, 73.126182], {
+            icon: customIcon
+        }).addTo(map);
+
+        // Create a DivIcon for text beside the markers
+        var textIcon1 = L.divIcon({
+            className: 'marker-text',
+            html: 'Anubhav'
+        });
+
+        var textIcon2 = L.divIcon({
+            className: 'marker-text',
+            html: 'Apurva'
+        });
+
+        // Create a polyline connecting the two markers
+        var latlngs = [marker1.getLatLng(), marker2.getLatLng()];
+        var polyline = L.polyline(latlngs, { color: 'red' }).addTo(map);
+
+        // Calculate the midpoint between the markers
+        var midpoint = L.latLng((latlngs[0].lat + latlngs[1].lat) / 2, (latlngs[0].lng + latlngs[1].lng) / 2);
+
+        // Define a DivIcon with a heart emoji
+        var heartIcon = L.divIcon({
+            className: 'heart-icon',
+            html: '<div>❤️</div>',
+            iconSize: [32, 32]
+        });
+
+        // Add a marker with the heart icon at the midpoint
+        var heartMarker = L.marker(midpoint, { icon: heartIcon }).addTo(map);
+
+        // Add markers with text beside them
+        var textMarker1 = L.marker([17.681727, 74.00836], { icon: textIcon1 }).addTo(map);
+        var textMarker2 = L.marker([22.313792, 73.126182], { icon: textIcon2 }).addTo(map);
+    </script>
+</body>
+</html>

@@ -1,14 +1,18 @@
-<!-- map.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>F.R.I.E.N.D.S</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Soulmates</title>
+    
+    <!-- Add Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
         crossorigin=""/>
 
+    
+    <!-- Define custom CSS for styling the heart icon -->
     <style>
-        /* CSS to style the heart icon */
         .heart-icon {
             text-align: center;
             line-height: 1;
@@ -16,6 +20,7 @@
     </style>
 </head>
 <body>
+    <!-- Create a div to hold the map -->
     <div id="map" style="height: 1000px;"></div>
      <!-- Make sure you put this AFTER Leaflet's CSS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -23,7 +28,6 @@
         crossorigin="">
     </script>
     <script>
-        // var map = L.map('map').setView([17.6805, 74.0183], 14);   // Satara
         var map = L.map('map').setView([20.5937, 78.9629], 5);   // India
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -37,19 +41,15 @@
             popupAnchor: [0, -32]  // Point from which the popup should open relative to the icon
         });
 
-        // Add a marker with the custom icon at a specific coordinate
         // Satara
-        var marker = L.marker([17.682033294249766, 74.00555097535157], {
+        var marker1 = L.marker([17.681727, 74.00836], {
             icon: customIcon
         }).addTo(map);
 
-
-        // Add a marker with the custom icon at a specific coordinate
         // Vadodara
-        var marker = L.marker([22.313792, 73.126182], {
+        var marker2 = L.marker([22.313792, 73.126182], {
             icon: customIcon
         }).addTo(map);
-
 
         // Coordinates of the two markers
         var latlngs = [marker1.getLatLng(), marker2.getLatLng()];
@@ -64,43 +64,11 @@
         var heartIcon = L.divIcon({
             className: 'heart-icon',
             html: '<div>❤️</div>',
-            iconSize: [32, 32]
+            iconSize: [52, 52]
         });
 
         // Add a marker with the heart icon at the midpoint
         var heartMarker = L.marker(midpoint, { icon: heartIcon }).addTo(map);
-
-
-
-
-
-
-
-
-
-        // // Replace 'City Name' in the HTML content with the actual city name from your data
-        // marker.getElement().querySelector('text').textContent = 'Satara';
-
-
-        // Red Dot
-        // var marker = L.marker([17.6805, 74.0183], {
-        // icon: L.divIcon({
-        //     className: 'custom-marker',  // You can define custom CSS styles for the marker
-        //     html: '<div style="background-color: red; width: 16px; height: 16px; border-radius: 50%;"></div>'
-        // })
-        // }).addTo(map);
-
-
-        // var map = L.map('map').setView([20.5937, 78.9629], 5);  // Set initial map coordinates and zoom level
-        // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);  // Add OpenStreetMap layer
-        
-        // var locations = {{ locations|safe }};
-        
-        // Add markers for each location
-        // locations.forEach(function(location) {
-        //     L.marker([location.latitude, location.longitude]).addTo(map)
-        //         .bindPopup(location.name);
-        // });
     </script>
 </body>
 </html>
